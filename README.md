@@ -18,3 +18,10 @@ PHP7+
 - [ ] Add Authorization
 - [ ] Customize ACL Rules
 - [ ] Documentation
+
+## Project Goal
+A secure and reliable management panel.
+
+## Inspired by
+http://freshmeat.sourceforge.net/projects/proxymin
+http://freshmeat.sourceforge.net/projects/squsermanager
