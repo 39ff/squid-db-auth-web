@@ -23,5 +23,5 @@ PHP7+
 A secure and reliable management panel.
 
 ## Inspired by
-http://freshmeat.sourceforge.net/projects/proxymin
-http://freshmeat.sourceforge.net/projects/squsermanager
+- http://freshmeat.sourceforge.net/projects/proxymin
+- http://freshmeat.sourceforge.net/projects/squsermanager
