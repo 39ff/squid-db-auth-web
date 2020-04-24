@@ -10,8 +10,7 @@ next generation squid user-management WebUI alternative proxymin,Squid Users Man
 https://wiki.squid-cache.org/ConfigExamples/Authenticate/Mysql
 
 ## Installation
-PHP7+
-
+PHP7+ , [DEVELOPMENT.md](DEVELOPMENT.md) 
 
 ## Todo
 - [x] Basic User Management
