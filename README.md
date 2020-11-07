@@ -1,3 +1,6 @@
+# THIS PROJECT HAS BEEN MOVED
+https://github.com/39ff/squidmin
+
 # squidmin
 next generation squid user-management WebUI alternative proxymin,Squid Users Manager
 
