@@ -1,6 +1,3 @@
-# THIS PROJECT HAS BEEN MOVED
-https://github.com/39ff/squidmin
-
 # squidmin
 next generation squid user-management WebUI alternative proxymin,Squid Users Manager
 
@@ -13,11 +10,12 @@ next generation squid user-management WebUI alternative proxymin,Squid Users Man
 https://wiki.squid-cache.org/ConfigExamples/Authenticate/Mysql
 
 ## Installation
-PHP7+
+PHP8+
 
 
 ## Todo
 - [x] Basic User Management
-- [ ] Add Authorization
+- [ ] IP Address Management  
 - [ ] Customize ACL Rules
 - [ ] Documentation
+- [ ] Tests
