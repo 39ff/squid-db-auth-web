@@ -31,7 +31,8 @@ class SearchRequest extends FormRequest
         ];
     }
 
-    public function searchUser(){
-        return $this->user();
+    public function searchUser(): array{
+        $validated =  $this->validated();
+        return $validated;
     }
 }

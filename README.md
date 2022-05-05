@@ -1,7 +1,7 @@
 # squidmin
-next generation squid user-management WebUI alternative proxymin,Squid Users Manager
+squid user-management WebUI alternative proxymin,Squid Users Manager
 
-![index](https://user-images.githubusercontent.com/7544687/79716113-a3db6000-8310-11ea-8f53-3f512e02aa46.PNG)
+Very simple and secure administration panel optimized for proxy distributors
 
 
 ## Pre requirements
@@ -14,19 +14,11 @@ https://wiki.squid-cache.org/ConfigExamples/Authenticate/Mysql
   
 
 ## Installation
-PHP8+
+PHP8+,composer
 
 
-## Todo
-- [x] WebAPI
-- [ ] WebGUI
-- [x] Basic User Management
-- [x] IP Address Management  
-- [ ] Customize ACL Rules (ansible?)
-- [ ] Documentation
-- [ ] WebAPI Documentation  
-- [x] Feature Tests
-- [ ] E2E Tests  
-- [ ] create docker-compose
-- [ ] Multiple Server Management
-- [ ] Metrics
+## Create an Administrator
+```
+php artisan db:seed --class=CreateAdministratorSeeder
+```
+

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\SquidAllowedIp;
 use App\Models\SquidUser;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -218,6 +219,45 @@ class UserActionTest extends TestCase
         $response = $this->actingAs($this->user)
             ->json('GET','/api/user/search',[]);
         $response->assertStatus(403);
+    }
+
+    public function test_can_create_squid_allowed_ip_own_by_unprivileged_user(){
+        $response = $this->actingAs($this->user)
+            ->json('POST','api/squidallowedip/create/to_specified_user/'.$this->user->id,[
+                'ip'=>'1.1.1.1'
+            ]);
+        $response->assertStatus(201);
+    }
+
+    public function test_can_create_squid_allowed_ip_to_other_user_by_administrator(){
+        $response = $this->actingAs($this->admin)
+            ->json('POST','api/squidallowedip/create/to_specified_user/'.$this->user->id,[
+                'ip'=>'8.8.8.8'
+            ]);
+        $response->assertStatus(201);
+    }
+
+    public function test_impossible_create_squid_allowed_ip_to_other_user_by_unprivileged_user(){
+        $response = $this->actingAs($this->user)
+            ->json('POST','api/squidallowedip/create/to_specified_user/'.$this->admin->id,[
+                'ip'=>'127.0.0.1'
+            ]);
+        $response->assertStatus(403);
+    }
+
+    public function test_can_search_squid_allowed_ip_own_by_unprivileged_user(){
+        $response = $this->actingAs($this->user)
+            ->json('GET','api/squidallowedip/search/to_specified_user/'.$this->user->id,[]);
+        $response->assertStatus(200);
+    }
+
+    public function test_can_destroy_squid_allowed_ip_own_by_unprivileged_user(){
+        $ip = SquidAllowedIp::factory()->create([
+            'user_id'=>$this->user->id
+        ]);
+        $response = $this->actingAs($this->user)
+            ->json('POST','api/squidallowedip/destroy/'.$ip->id,[]);
+        $response->assertStatus(200);
     }
 
     private function createAdministrator(){

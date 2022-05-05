@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\SquidUser;
 
-use App\Models\SquidUser;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -31,11 +30,8 @@ class SearchRequest extends FormRequest
         ];
     }
 
-    public function searchSquidUser(){
-        $squidUser = new SquidUser($this->validated());
-        $squidUser->user_id = $this->route()->parameter('user_id');
-
-        return $squidUser;
+    public function searchSquidUser(): array{
+        $validated = $this->validated();
+        return $validated;
     }
-
 }

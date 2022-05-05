@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\SquidUserController;
+use App\Http\Controllers\Api\SquidAllowedIpController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,17 +23,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:sanctum'], function()
 {
     Route::group(['prefix'=>'user'],function(){
-        Route::post('create',[\App\Http\Controllers\Api\UserController::class,'create']);
-        Route::post('modify/{id}',[\App\Http\Controllers\Api\UserController::class,'modify']);
-        Route::post('destroy/{id}',[\App\Http\Controllers\Api\UserController::class,'destroy']);
-        Route::get('search',[\App\Http\Controllers\Api\UserController::class,'search']);
+        Route::post('create',[UserController::class,'create']);
+        Route::post('modify/{id}',[UserController::class,'modify']);
+        Route::post('destroy/{id}',[UserController::class,'destroy']);
+        Route::get('search',[UserController::class,'search']);
     });
 
     Route::group(['prefix'=>'squiduser'],function(){
-        Route::post('create/to_specified_user/{user_id}',[\App\Http\Controllers\Api\SquidUserController::class,'create']);
-        Route::post('modify/{id}',[\App\Http\Controllers\Api\SquidUserController::class,'modify']);
-        Route::post('destroy/{id}',[\App\Http\Controllers\Api\SquidUserController::class,'destroy']);
-        Route::get('search/to_specified_user/{user_id}',[\App\Http\Controllers\Api\SquidUserController::class,'search']);
+        Route::post('create/to_specified_user/{user_id}',[SquidUserController::class,'create']);
+        Route::post('modify/{id}',[SquidUserController::class,'modify']);
+        Route::post('destroy/{id}',[SquidUserController::class,'destroy']);
+        Route::get('search/to_specified_user/{user_id}',[SquidUserController::class,'search']);
+    });
+
+    Route::group(['prefix'=>'squidallowedip'],function(){
+        Route::post('create/to_specified_user/{user_id}',[SquidAllowedIpController::class,'create']);
+        Route::post('modify/{id}',[SquidAllowedIpController::class,'modify']);
+        Route::post('destroy/{id}',[SquidAllowedIpController::class,'destroy']);
+        Route::get('search/to_specified_user/{user_id}',[SquidAllowedIpController::class,'search']);
     });
 
 });
