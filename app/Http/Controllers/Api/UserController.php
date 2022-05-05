@@ -17,10 +17,9 @@ use App\UseCases\User\ModifyAction;
 class UserController extends Controller
 {
     public function search(SearchRequest $request, SearchAction $action) : UserCollection{
-        $user = $request->searchUser();
-        $query = $request->validated();
+        $query = $request->searchUser();
 
-        return new UserCollection($action($user,$query));
+        return new UserCollection($action($query));
     }
 
     public function create(CreateRequest $request, CreateAction $action) : UserResource{

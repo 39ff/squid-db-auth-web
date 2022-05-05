@@ -7,9 +7,8 @@ use function assert;
 class DestroyAction{
     public function __invoke(SquidUser $squidUser): SquidUser
     {
-        $modifyUser = SquidUser::query()->where('id','=',$squidUser->id)->first();
-        assert($modifyUser->exists);
-        $modifyUser->delete();
-        return $modifyUser;
+        assert($squidUser->exists);
+        $squidUser->delete();
+        return $squidUser;
     }
 }

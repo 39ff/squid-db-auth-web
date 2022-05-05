@@ -35,8 +35,7 @@ class DestroyRequest extends FormRequest
     }
 
     public function destroySquidUser() : SquidUser{
-        $squidUser =  new SquidUser($this->validated());
-        $squidUser->id = $this->route()->parameter('id');
+        $squidUser = SquidUser::query()->where('id','=',$this->route()->parameter('id'))->first();
         return $squidUser;
     }
 }

@@ -29,7 +29,7 @@ class CreateRequest extends FormRequest
         return [
             'name'=>'required',
             'email'=>'required|unique:users',
-            'password'=>'required',
+            'password'=>['required', 'string', 'min:8'],
         ];
     }
 

@@ -37,7 +37,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('destroy-squid-user', [SquidUserPolicy::class, 'destroy']);
         Gate::define('search-squid-user', [SquidUserPolicy::class, 'search']);
 
-        Gate::define('create-allowed-ip', [AllowedIpPolicy::class, 'create']);
-        Gate::define('destroy-allowed-ip', [AllowedIpPolicy::class, 'destroy']);
+        Gate::define('create-squid-allowed-ip', [AllowedIpPolicy::class, 'create']);
+        Gate::define('destroy-squid-allowed-ip', [AllowedIpPolicy::class, 'destroy']);
+        Gate::define('search-squid-allowed-ip', [AllowedIpPolicy::class, 'search']);
     }
 }

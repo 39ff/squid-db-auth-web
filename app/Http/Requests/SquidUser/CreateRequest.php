@@ -19,6 +19,15 @@ class CreateRequest extends FormRequest
         return $auth;
     }
 
+    protected function prepareForValidation()
+    {
+        if(empty($this->enabled)){
+            $this->merge([
+                'enabled'=>0
+            ]);
+        }
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -27,11 +36,11 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user'=>'required|unique:squid_users',
-            'password'=>'required',
-            'enabled'=>'required',
-            'fullname'=>'filled',
-            'comment'=>'filled'
+            'user'=>'min:4|required|unique:squid_users',
+            'password'=>['required', 'string', 'min:8'],
+            'enabled'=>'filled|digits_between:0,1',
+            'fullname'=>'nullable',
+            'comment'=>'nullable'
         ];
     }
 

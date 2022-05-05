@@ -18,8 +18,8 @@ class ModifyRequest extends FormRequest
     {
         return [
             'name'=>'filled',
-            'email'=>'filled',
-            'password'=>'filled',
+            'email'=>'filled|unique:users,email,'.$this->route()->parameter('id').',id',
+            'password'=>['string', 'min:8','filled'],
         ];
     }
 

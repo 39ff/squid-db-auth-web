@@ -22,6 +22,16 @@ class ModifyRequest extends FormRequest
         return $auth;
     }
 
+
+    protected function prepareForValidation()
+    {
+        if(empty($this->enabled)){
+            $this->merge([
+                'enabled'=>0
+            ]);
+        }
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,11 +40,11 @@ class ModifyRequest extends FormRequest
     public function rules()
     {
         return [
-            'user'=>'filled|unique:squid_users,user,'.$this->route()->parameter('id').',id',
-            'password'=>'filled',
-            'enabled'=>'filled',
-            'fullname'=>'filled',
-            'comment'=>'filled'
+            'user'=>'min:4|filled|unique:squid_users,user,'.$this->route()->parameter('id').',id',
+            'password'=>['required', 'string', 'min:8'],
+            'enabled'=>'filled|digits_between:0,1',
+            'fullname'=>'nullable',
+            'comment'=>'nullable'
         ];
     }
 

@@ -17,13 +17,12 @@ class CreateAdministratorSeeder extends Seeder
      */
     public function run()
     {
+        $email = 'administrator'.date('Ymd').'@example.com';
         $password = Str::random(30);
-        echo $password.PHP_EOL;
-
         $aUser = new User();
         $aUser->fill([
             'name'=>'administrator',
-            'email'=>'administrator@example.com',
+            'email'=>$email,
             'password'=>Hash::make($password),
             'is_administrator'=>1,
         ]);
@@ -31,7 +30,8 @@ class CreateAdministratorSeeder extends Seeder
         $user = Auth::loginUsingId($aUser->id);
         $token = $user->createToken('token1');
 
-        dd($token);
-
+        echo "Email: ".$email.PHP_EOL;
+        echo "Password: ".$password.PHP_EOL;
+        echo "Token: ".$token->plainTextToken.PHP_EOL;
     }
 }

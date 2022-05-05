@@ -6,15 +6,19 @@ use function assert;
 
 class DestroyAction{
     /**
-     * @param User $user
+     * @param User $destroyUser
      * @return User
      */
-    public function __invoke(User $user): User
+    public function __invoke(User $destroyUser): User
     {
-        assert($user->id !== null);
-        $destroyUser = User::query()->where('id','=',$user->id)->first();
         assert($destroyUser->exists);
-        assert($destroyUser->is_administrator === 0);
+        $countAdministrator = User::query()
+            ->where('id','<>',$destroyUser->id)
+            ->where('is_administrator','=',1)
+            ->count()
+        ;
+        //disable locked out.
+        assert($countAdministrator !== 0);
         $destroyUser->delete();
         return $destroyUser;
     }

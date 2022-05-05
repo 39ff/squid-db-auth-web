@@ -29,8 +29,7 @@ class DestroyRequest extends FormRequest
 
     public function destroyUser(): User
     {
-        $user =  new User();
-        $user->id = $this->route()->parameter('id');
+        $user =  User::query()->where('id','=',$this->route()->parameter('id'))->first();
         return $user;
     }
 }
