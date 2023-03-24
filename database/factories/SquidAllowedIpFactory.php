@@ -17,7 +17,7 @@ class SquidAllowedIpFactory extends Factory
     public function definition()
     {
         return [
-            'ip'=>$this->faker->ipv4,
+            'ip'=>$this->faker->ipv4(),
         ];
     }
 }
