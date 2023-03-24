@@ -11,10 +11,8 @@ class DestroyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize(Gate $gate, SquidUserService $squidUserService)
+    public function authorize(Gate $gate, SquidUserService $squidUserService): bool
     {
         $auth = $gate->allows('destroy-squid-user',
                 $squidUserService->getById($this->route()->parameter('id'))
@@ -25,10 +23,8 @@ class DestroyRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             //

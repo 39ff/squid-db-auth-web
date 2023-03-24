@@ -10,10 +10,8 @@ class CreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize(Gate $gate)
+    public function authorize(Gate $gate): bool
     {
         $auth = $gate->allows('create-squid-allowed-ip', $this->route()->parameter('user_id'));
 
@@ -22,10 +20,8 @@ class CreateRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'ip'=>'required|ip|unique:squid_allowed_ips',

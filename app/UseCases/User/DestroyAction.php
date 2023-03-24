@@ -7,10 +7,6 @@ use function assert;
 
 class DestroyAction
 {
-    /**
-     * @param User $destroyUser
-     * @return User
-     */
     public function __invoke(User $destroyUser): User
     {
         assert($destroyUser->exists);

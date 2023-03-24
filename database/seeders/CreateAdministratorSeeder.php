@@ -12,10 +12,8 @@ class CreateAdministratorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $email = 'administrator'.date('Ymd').'@example.com';
         $password = Str::random(30);

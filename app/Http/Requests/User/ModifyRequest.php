@@ -15,7 +15,7 @@ class ModifyRequest extends FormRequest
         return $auth;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'name'=>'filled',

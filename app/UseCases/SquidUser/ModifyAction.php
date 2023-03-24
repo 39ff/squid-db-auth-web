@@ -7,10 +7,6 @@ use function assert;
 
 class ModifyAction
 {
-    /**
-     * @param SquidUser $squidUser
-     * @return SquidUser
-     */
     public function __invoke(SquidUser $squidUser): SquidUser
     {
         $modifyUser = SquidUser::query()->where('id', '=', $squidUser->id)->first();

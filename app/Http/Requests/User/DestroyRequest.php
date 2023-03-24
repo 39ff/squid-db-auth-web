@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class DestroyRequest extends FormRequest
 {
-    public function authorize(Gate $gate)
+    public function authorize(Gate $gate): bool
     {
         $auth = $gate->allows('destroy-user', $this->route()->parameter('id'));
 
@@ -17,10 +17,8 @@ class DestroyRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
 

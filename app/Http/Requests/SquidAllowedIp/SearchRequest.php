@@ -9,20 +9,16 @@ class SearchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize(Gate $gate)
+    public function authorize(Gate $gate): bool
     {
         return $gate->allows('search-squid-allowed-ip', $this->route()->parameter('user_id'));
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'per'=>'digits_between:1,100',

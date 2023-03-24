@@ -13,7 +13,9 @@ use App\UseCases\SquidUser\CreateAction;
 use App\UseCases\SquidUser\DestroyAction;
 use App\UseCases\SquidUser\ModifyAction;
 use App\UseCases\SquidUser\SearchAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SquidUserController extends Controller
 {
@@ -24,19 +26,19 @@ class SquidUserController extends Controller
         $this->squidUserService = $squidUserService;
     }
 
-    public function search(SearchRequest $request, SearchAction $action)
+    public function search(SearchRequest $request, SearchAction $action): View
     {
         return view('squidusers.search', [
             'users'=>$action($request->searchSquidUser()),
         ]);
     }
 
-    public function creator()
+    public function creator(): View
     {
         return view('squidusers.creator');
     }
 
-    public function editor(ReadRequest $request)
+    public function editor(ReadRequest $request): View
     {
         $squidUser = $this->squidUserService->getById($request->route()->parameter('id'));
 
@@ -50,21 +52,21 @@ class SquidUserController extends Controller
         ]);
     }
 
-    public function modify(ModifyRequest $request, ModifyAction $action)
+    public function modify(ModifyRequest $request, ModifyAction $action): RedirectResponse
     {
         $action($request->modifySquidUser());
 
         return redirect()->route('squiduser.search', $request->user()->id);
     }
 
-    public function create(CreateRequest $request, CreateAction $action)
+    public function create(CreateRequest $request, CreateAction $action): RedirectResponse
     {
         $action($request->createSquidUser());
 
         return redirect()->route('squiduser.search', $request->user()->id);
     }
 
-    public function destroy(DestroyRequest $request, DestroyAction $action)
+    public function destroy(DestroyRequest $request, DestroyAction $action): RedirectResponse
     {
         $action($request->destroySquidUser());
 

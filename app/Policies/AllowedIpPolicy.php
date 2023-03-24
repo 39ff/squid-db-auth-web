@@ -33,7 +33,7 @@ class AllowedIpPolicy
         return false;
     }
 
-    public function create(User $user, string $toSpecifiedUserId)
+    public function create(User $user, string $toSpecifiedUserId): bool
     {
         if ($user->is_administrator === 1) {
             return true;
