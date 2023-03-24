@@ -11,8 +11,10 @@
                             <a href="{{ route('squiduser.creator') }}">Create SquidUser</a>
                             <thead>
                             <tr>
-                                <th scope="col">{{ __('Id') }}</th>
-                                <th scope="col">{{ __('UserId') }}</th>
+                                @can('create-user')
+                                    <th scope="col">{{ __('Id') }}</th>
+                                    <th scope="col">{{ __('Name') }}</th>
+                                @endcan
                                 <th scope="col">{{ __('User') }}</th>
                                 <th scope="col">{{ __('Enabled') }}</th>
                                 <th scope="col">{{ __('FullName') }}</th>
@@ -21,10 +23,13 @@
                             </tr>
                             </thead>
                             <tbody>
+
                             @foreach($users as $user)
                                 <tr>
-                                    <th scope="row">{{ $user->id }}</th>
-                                    <td>{{{ $user->user_id }}}</td>
+                                    @can('create-user')
+                                        <th scope="row">{{ $user->id }}</th>
+                                        <td>{{{ $user->laravel_user->name }}}</td>
+                                    @endcan
                                     <td><a href="{{ route('squiduser.editor',$user->id) }}">{{{ $user->user }}}</a></td>
                                     <td>
                                         @if($user->enabled == 1)

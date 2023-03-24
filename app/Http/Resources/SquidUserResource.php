@@ -21,7 +21,7 @@ class SquidUserResource extends JsonResource
             'password'=>$this->resource->password,
             'enabled'=>$this->resource->enabled,
             'fullname'=>$this->resource->fullname,
-            'comment'=>$this->resource->comment
+            'comment'=>$this->resource->comment,
         ];
     }
 }

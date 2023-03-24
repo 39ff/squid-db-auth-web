@@ -14,7 +14,8 @@ class SearchRequest extends FormRequest
      */
     public function authorize(Gate $gate)
     {
-        $auth =  $gate->allows('search-squid-user',$this->route()->parameter('user_id'));
+        $auth = $gate->allows('search-squid-user', $this->route()->parameter('user_id'));
+
         return $auth;
     }
 
@@ -30,8 +31,10 @@ class SearchRequest extends FormRequest
         ];
     }
 
-    public function searchSquidUser(): array{
+    public function searchSquidUser(): array
+    {
         $validated = $this->validated();
+
         return $validated;
     }
 }

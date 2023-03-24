@@ -8,6 +8,7 @@ use JsonSerializable;
 class SquidAllowedIpCollection extends ResourceCollection
 {
     public $collects = SquidAllowedIpResource::class;
+
     /**
      * Transform the resource collection into an array.
      *
@@ -17,7 +18,7 @@ class SquidAllowedIpCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data'=>$this->collection
+            'data'=>$this->collection,
         ];
     }
 }

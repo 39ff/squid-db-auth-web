@@ -15,15 +15,16 @@ class CreateRequest extends FormRequest
      */
     public function authorize(Gate $gate)
     {
-        $auth =  $gate->allows('create-squid-user',$this->route()->parameter('user_id'));
+        $auth = $gate->allows('create-squid-user', $this->route()->parameter('user_id'));
+
         return $auth;
     }
 
     protected function prepareForValidation()
     {
-        if(empty($this->enabled)){
+        if (empty($this->enabled)) {
             $this->merge([
-                'enabled'=>0
+                'enabled'=>0,
             ]);
         }
     }
@@ -40,7 +41,7 @@ class CreateRequest extends FormRequest
             'password'=>['required', 'string', 'min:8'],
             'enabled'=>'filled|digits_between:0,1',
             'fullname'=>'nullable',
-            'comment'=>'nullable'
+            'comment'=>'nullable',
         ];
     }
 
@@ -48,6 +49,7 @@ class CreateRequest extends FormRequest
     {
         $squidUser = new SquidUser($this->validated());
         $squidUser->user_id = $this->route()->parameter('user_id');
+
         return $squidUser;
     }
 }

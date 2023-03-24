@@ -13,7 +13,7 @@
                             <tr>
                                 @can('create-user')
                                     <th scope="col">{{ __('Id') }}</th>
-                                    <th scope="col">{{ __('UserId') }}</th>
+                                    <th scope="col">{{ __('Name') }}</th>
                                 @endcan
                                 <th scope="col">{{ __('IP') }}</th>
                                 <th scope="col">{{ __('Actions') }}</th>
@@ -23,8 +23,8 @@
                             @foreach($ips as $ip)
                                 <tr>
                                     @can('create-user')
-                                    <td>{{ $ip->id }}</td>
-                                    <td>{{ $ip->user_id }}</td>
+                                        <td>{{ $ip->id }}</td>
+                                        <td>{{ $ip->laravel_user->name }}</td>
                                     @endcan
                                     <td>{{{ $ip->ip }}}</td>
                                     <td>

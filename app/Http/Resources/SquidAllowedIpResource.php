@@ -17,7 +17,7 @@ class SquidAllowedIpResource extends JsonResource
     {
         return [
             'id'=> $this->resource->id,
-            'ip'=>$this->resource->ip
+            'ip'=>$this->resource->ip,
         ];
     }
 }

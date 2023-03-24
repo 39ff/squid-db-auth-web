@@ -22,7 +22,7 @@ class SquidUserFactory extends Factory
             'password' => Str::random(10),
             'enabled'=>1,
             'fullname'=>$this->faker->name(),
-            'comment'=> Str::random(20)
+            'comment'=> Str::random(20),
         ];
     }
 }

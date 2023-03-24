@@ -14,7 +14,7 @@ class SearchRequest extends FormRequest
      */
     public function authorize(Gate $gate)
     {
-        return $gate->allows('search-squid-allowed-ip',$this->route()->parameter('user_id'));
+        return $gate->allows('search-squid-allowed-ip', $this->route()->parameter('user_id'));
     }
 
     /**
@@ -25,12 +25,14 @@ class SearchRequest extends FormRequest
     public function rules()
     {
         return [
-            'per'=>'digits_between:1,100'
+            'per'=>'digits_between:1,100',
         ];
     }
 
-    public function searchSquidAllowedIp(){
-        $validated =  $this->validated();
+    public function searchSquidAllowedIp()
+    {
+        $validated = $this->validated();
+
         return $validated;
     }
 }

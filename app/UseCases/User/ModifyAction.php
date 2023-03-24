@@ -1,10 +1,12 @@
 <?php
+
 namespace App\UseCases\User;
 
 use App\Models\User;
 use function assert;
 
-class ModifyAction{
+class ModifyAction
+{
     /**
      * @param User $user
      * @return User
@@ -12,10 +14,11 @@ class ModifyAction{
     public function __invoke(User $user): User
     {
         assert($user->id !== null);
-        $updateUser = User::query()->where('id','=',$user->id)->first();
+        $updateUser = User::query()->where('id', '=', $user->id)->first();
         assert($updateUser->exists);
         $updateUser->fill($user->getAttributes());
         $updateUser->save();
+
         return $updateUser;
     }
 }

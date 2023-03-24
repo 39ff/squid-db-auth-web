@@ -14,9 +14,9 @@ class DestroyRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Gate $gate,SquidAllowedIpService $squidAllowedIpService)
+    public function authorize(Gate $gate, SquidAllowedIpService $squidAllowedIpService)
     {
-        return $gate->allows('destroy-squid-allowed-ip',$squidAllowedIpService->getById($this->route()->parameter('id')));
+        return $gate->allows('destroy-squid-allowed-ip', $squidAllowedIpService->getById($this->route()->parameter('id')));
     }
 
     /**
@@ -31,9 +31,10 @@ class DestroyRequest extends FormRequest
         ];
     }
 
-    public function destroySquidAllowedIp() : SquidAllowedIp{
-        $ip = SquidAllowedIp::query()->where('id','=',$this->route()->parameter('id'))->first();
+    public function destroySquidAllowedIp() : SquidAllowedIp
+    {
+        $ip = SquidAllowedIp::query()->where('id', '=', $this->route()->parameter('id'))->first();
+
         return $ip;
     }
-
 }

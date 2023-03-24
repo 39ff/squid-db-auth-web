@@ -3,8 +3,8 @@
 namespace App\Http\Requests\User;
 
 use App\Models\User;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Auth\Access\Gate;
+use Illuminate\Foundation\Http\FormRequest;
 
 class CreateRequest extends FormRequest
 {
@@ -15,7 +15,8 @@ class CreateRequest extends FormRequest
      */
     public function authorize(Gate $gate) : bool
     {
-        $auth =  $gate->allows('create-user');
+        $auth = $gate->allows('create-user');
+
         return $auth;
     }
 

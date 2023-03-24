@@ -19,26 +19,31 @@ class UserPolicy
         //
     }
 
-    public function create(User $user){
+    public function create(User $user)
+    {
         return $user->is_administrator === 1;
     }
 
-    public function modify(User $user,string $updateUserId){
-        if($user->is_administrator === 1){
+    public function modify(User $user, string $updateUserId)
+    {
+        if ($user->is_administrator === 1) {
             return true;
         }
 
-        if(strcmp((string)$user->id,$updateUserId) === 0){
+        if (strcmp((string) $user->id, $updateUserId) === 0) {
             return true;
         }
+
         return false;
     }
 
-    public function destroy(User $user){
+    public function destroy(User $user)
+    {
         return $user->is_administrator === 1;
     }
 
-    public function search(User $user){
+    public function search(User $user)
+    {
         return $user->is_administrator === 1;
     }
 }
