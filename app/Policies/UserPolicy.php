@@ -19,7 +19,7 @@ class UserPolicy
         //
     }
 
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->is_administrator === 1;
     }

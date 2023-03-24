@@ -12,7 +12,7 @@ class ReadRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Gate $gate)
+    public function authorize(Gate $gate): bool
     {
         $auth = $gate->allows('search-user');
 
@@ -24,7 +24,7 @@ class ReadRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
         ];

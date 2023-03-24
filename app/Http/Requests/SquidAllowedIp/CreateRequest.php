@@ -13,7 +13,7 @@ class CreateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Gate $gate)
+    public function authorize(Gate $gate): bool
     {
         $auth = $gate->allows('create-squid-allowed-ip', $this->route()->parameter('user_id'));
 
@@ -25,7 +25,7 @@ class CreateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'ip'=>'required|ip|unique:squid_allowed_ips',

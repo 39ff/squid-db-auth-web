@@ -14,7 +14,7 @@ class ModifyRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Gate $gate, SquidUserService $squidUserService)
+    public function authorize(Gate $gate, SquidUserService $squidUserService): bool
     {
         $auth = $gate->allows('modify-squid-user',
             $squidUserService->getById($this->route()->parameter('id'))
@@ -37,7 +37,7 @@ class ModifyRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'user'=>'min:4|filled|unique:squid_users,user,'.$this->route()->parameter('id').',id',

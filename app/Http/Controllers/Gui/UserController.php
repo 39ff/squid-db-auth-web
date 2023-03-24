@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Gui;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\DestroyRequest;
@@ -24,21 +26,21 @@ class UserController extends Controller
         $this->user = $user;
     }
 
-    public function create(CreateRequest $request, CreateAction $action)
+    public function create(CreateRequest $request, CreateAction $action): RedirectResponse
     {
         $action($request->createUser());
 
         return redirect()->route('user.search');
     }
 
-    public function modify(ModifyRequest $request, ModifyAction $action)
+    public function modify(ModifyRequest $request, ModifyAction $action): RedirectResponse
     {
         $action($request->modifyUser());
 
         return redirect()->route('user.search');
     }
 
-    public function editor(ReadRequest $request)
+    public function editor(ReadRequest $request): View
     {
         $user = $this->user->getById($request->route()->parameter('id'));
 
@@ -49,7 +51,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function creator()
+    public function creator(): View
     {
         return view('users.creator');
     }
@@ -61,7 +63,7 @@ class UserController extends Controller
         return back();
     }
 
-    public function search(SearchRequest $request, SearchAction $action)
+    public function search(SearchRequest $request, SearchAction $action): View
     {
         return view('users.search', [
             'users'=>$action($request->searchUser()),

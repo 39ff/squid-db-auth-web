@@ -24,7 +24,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Gate::define('create-user', [UserPolicy::class, 'create']);
         Gate::define('modify-user', [UserPolicy::class, 'modify']);

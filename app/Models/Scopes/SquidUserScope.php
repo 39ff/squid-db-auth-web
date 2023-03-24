@@ -16,7 +16,7 @@ class SquidUserScope implements Scope
      * @param \Illuminate\Database\Eloquent\Model $model
      * @return void
      */
-    public function apply(Builder $builder, Model $model)
+    public function apply(Builder $builder, Model $model): void
     {
         if (Auth::hasUser() && Auth::user()->is_administrator !== 1) {
             $builder->where('user_id', '=', Auth::user()->id);

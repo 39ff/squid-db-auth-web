@@ -13,7 +13,7 @@ class SearchRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Gate $gate)
+    public function authorize(Gate $gate): bool
     {
         $auth = $gate->allows('search-user');
 
@@ -25,7 +25,7 @@ class SearchRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'per'=>'digits_between:1,100',

@@ -25,7 +25,7 @@ class UserActionTest extends TestCase
         $this->admin = $this->createAdministrator();
     }
 
-    public function test_can_create_user_by_administrator()
+    public function test_can_create_user_by_administrator(): void
     {
         $response = $this->actingAs($this->admin)
             ->json('POST', 'api/user/create', [
@@ -36,7 +36,7 @@ class UserActionTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function test_impossible_create_user_by_unprivileged_user()
+    public function test_impossible_create_user_by_unprivileged_user(): void
     {
         $response = $this->actingAs($this->user)
             ->json('POST', 'api/user/create', [
@@ -47,7 +47,7 @@ class UserActionTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_can_modify_own_by_unprivileged_user()
+    public function test_can_modify_own_by_unprivileged_user(): void
     {
         $response = $this->actingAs($this->user)
             ->json('POST', 'api/user/modify/'.$this->user->id, [
@@ -64,7 +64,7 @@ class UserActionTest extends TestCase
         ]);
     }
 
-    public function test_can_modify_other_user_by_administrator()
+    public function test_can_modify_other_user_by_administrator(): void
     {
         $response = $this->actingAs($this->user)
             ->json('POST', 'api/user/modify/'.$this->user->id, [
@@ -81,7 +81,7 @@ class UserActionTest extends TestCase
         ]);
     }
 
-    public function test_can_destroy_other_user_by_administrator()
+    public function test_can_destroy_other_user_by_administrator(): void
     {
         $aUser = User::factory()->create([
             'is_administrator'=>0,
@@ -91,7 +91,7 @@ class UserActionTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_impossible_destroy_other_user_by_unprivileged_user()
+    public function test_impossible_destroy_other_user_by_unprivileged_user(): void
     {
         $aUser = User::factory()->create([
             'is_administrator'=>0,
@@ -104,7 +104,7 @@ class UserActionTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_impossible_destroy_own_by_unprivileged_user()
+    public function test_impossible_destroy_own_by_unprivileged_user(): void
     {
         $aUser = User::factory()->create([
             'is_administrator'=>0,
@@ -114,7 +114,7 @@ class UserActionTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_can_create_squid_user_by_administrator()
+    public function test_can_create_squid_user_by_administrator(): void
     {
         $response = $this->actingAs($this->admin)
             ->json('POST', 'api/squiduser/create/to_specified_user/'.$this->admin->id, [
@@ -127,7 +127,7 @@ class UserActionTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function test_impossible_create_duplicate_squid_user_by_administrator()
+    public function test_impossible_create_duplicate_squid_user_by_administrator(): void
     {
         $this->actingAs($this->admin)
             ->json('POST', 'api/squiduser/create/to_specified_user/'.$this->admin->id, [
@@ -148,7 +148,7 @@ class UserActionTest extends TestCase
             ])->assertStatus(422);
     }
 
-    public function test_can_create_squid_user_to_other_user_by_administrator()
+    public function test_can_create_squid_user_to_other_user_by_administrator(): void
     {
         $response = $this->actingAs($this->admin)
             ->json('POST', 'api/squiduser/create/to_specified_user/'.$this->user->id, [
@@ -161,7 +161,7 @@ class UserActionTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function test_impossible_create_squid_user_to_other_user_by_unprivileged_user()
+    public function test_impossible_create_squid_user_to_other_user_by_unprivileged_user(): void
     {
         $response = $this->actingAs($this->user)
             ->json('POST', 'api/squiduser/create/to_specified_user/'.$this->admin->id, [
@@ -174,28 +174,28 @@ class UserActionTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_can_search_squid_user_own_by_unprivileged_user()
+    public function test_can_search_squid_user_own_by_unprivileged_user(): void
     {
         $response = $this->actingAs($this->user)
             ->json('GET', '/api/squiduser/search/to_specified_user/'.$this->user->id, []);
         $response->assertStatus(200);
     }
 
-    public function test_impossible_search_squid_user_to_other_user_by_unprivileged_user()
+    public function test_impossible_search_squid_user_to_other_user_by_unprivileged_user(): void
     {
         $response = $this->actingAs($this->user)
             ->json('GET', '/api/squiduser/search/to_specified_user/'.$this->admin->id, []);
         $response->assertStatus(403);
     }
 
-    public function test_can_search_squid_user_to_other_user_by_administrator()
+    public function test_can_search_squid_user_to_other_user_by_administrator(): void
     {
         $response = $this->actingAs($this->admin)
             ->json('GET', '/api/squiduser/search/to_specified_user/'.$this->user->id, []);
         $response->assertStatus(200);
     }
 
-    public function test_can_destroy_squid_user_own_by_unprivileged_user()
+    public function test_can_destroy_squid_user_own_by_unprivileged_user(): void
     {
         $aUser = User::factory()->create([
             'is_administrator'=>0,
@@ -208,7 +208,7 @@ class UserActionTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_impossible_destroy_squid_user_to_other_user_by_unprivileged_user()
+    public function test_impossible_destroy_squid_user_to_other_user_by_unprivileged_user(): void
     {
         $aUser = User::factory()->create([
             'is_administrator'=>0,
@@ -224,21 +224,21 @@ class UserActionTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_can_search_users_by_administrator()
+    public function test_can_search_users_by_administrator(): void
     {
         $response = $this->actingAs($this->admin)
             ->json('GET', '/api/user/search', []);
         $response->assertStatus(200);
     }
 
-    public function test_impossible_search_users_by_unprivileged_user()
+    public function test_impossible_search_users_by_unprivileged_user(): void
     {
         $response = $this->actingAs($this->user)
             ->json('GET', '/api/user/search', []);
         $response->assertStatus(403);
     }
 
-    public function test_can_create_squid_allowed_ip_own_by_unprivileged_user()
+    public function test_can_create_squid_allowed_ip_own_by_unprivileged_user(): void
     {
         $response = $this->actingAs($this->user)
             ->json('POST', 'api/squidallowedip/create/to_specified_user/'.$this->user->id, [
@@ -247,7 +247,7 @@ class UserActionTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function test_can_create_squid_allowed_ip_to_other_user_by_administrator()
+    public function test_can_create_squid_allowed_ip_to_other_user_by_administrator(): void
     {
         $response = $this->actingAs($this->admin)
             ->json('POST', 'api/squidallowedip/create/to_specified_user/'.$this->user->id, [
@@ -256,7 +256,7 @@ class UserActionTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function test_impossible_create_squid_allowed_ip_to_other_user_by_unprivileged_user()
+    public function test_impossible_create_squid_allowed_ip_to_other_user_by_unprivileged_user(): void
     {
         $response = $this->actingAs($this->user)
             ->json('POST', 'api/squidallowedip/create/to_specified_user/'.$this->admin->id, [
@@ -265,14 +265,14 @@ class UserActionTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_can_search_squid_allowed_ip_own_by_unprivileged_user()
+    public function test_can_search_squid_allowed_ip_own_by_unprivileged_user(): void
     {
         $response = $this->actingAs($this->user)
             ->json('GET', 'api/squidallowedip/search/to_specified_user/'.$this->user->id, []);
         $response->assertStatus(200);
     }
 
-    public function test_can_destroy_squid_allowed_ip_own_by_unprivileged_user()
+    public function test_can_destroy_squid_allowed_ip_own_by_unprivileged_user(): void
     {
         $ip = SquidAllowedIp::factory()->create([
             'user_id'=>$this->user->id,

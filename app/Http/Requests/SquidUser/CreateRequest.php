@@ -13,7 +13,7 @@ class CreateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Gate $gate)
+    public function authorize(Gate $gate): bool
     {
         $auth = $gate->allows('create-squid-user', $this->route()->parameter('user_id'));
 
@@ -34,7 +34,7 @@ class CreateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'user'=>'min:4|required|unique:squid_users',

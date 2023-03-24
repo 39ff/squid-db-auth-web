@@ -12,7 +12,7 @@ class SearchRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Gate $gate)
+    public function authorize(Gate $gate): bool
     {
         return $gate->allows('search-squid-allowed-ip', $this->route()->parameter('user_id'));
     }
@@ -22,7 +22,7 @@ class SearchRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'per'=>'digits_between:1,100',

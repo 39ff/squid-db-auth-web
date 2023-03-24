@@ -13,7 +13,7 @@ class ReadRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Gate $gate, SquidUserService $squidUserService)
+    public function authorize(Gate $gate, SquidUserService $squidUserService): bool
     {
         $auth = $gate->allows('modify-squid-user',
             $squidUserService->getById($this->route()->parameter('id'))
@@ -27,7 +27,7 @@ class ReadRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
         ];
