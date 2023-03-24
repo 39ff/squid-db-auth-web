@@ -19,41 +19,52 @@ class UserController extends Controller
 {
     private $user;
 
-    public function __construct(UserService $user){
+    public function __construct(UserService $user)
+    {
         $this->user = $user;
     }
 
-    public function create(CreateRequest $request,CreateAction $action){
+    public function create(CreateRequest $request, CreateAction $action)
+    {
         $action($request->createUser());
+
         return redirect()->route('user.search');
     }
 
-    public function modify(ModifyRequest $request,ModifyAction $action){
+    public function modify(ModifyRequest $request, ModifyAction $action)
+    {
         $action($request->modifyUser());
+
         return redirect()->route('user.search');
     }
 
-    public function editor(ReadRequest $request){
+    public function editor(ReadRequest $request)
+    {
         $user = $this->user->getById($request->route()->parameter('id'));
-        return view('users.editor',[
+
+        return view('users.editor', [
             'id'=>$user->id,
             'name'=>$user->name,
-            'email'=>$user->email
+            'email'=>$user->email,
         ]);
     }
 
-    public function creator(){
+    public function creator()
+    {
         return view('users.creator');
     }
 
-    public function destroy(DestroyRequest $request,DestroyAction $action){
+    public function destroy(DestroyRequest $request, DestroyAction $action)
+    {
         $action($request->destroyUser());
+
         return back();
     }
 
-    public function search(SearchRequest $request,SearchAction $action){
-        return view('users.search',[
-            'users'=>$action($request->searchUser())
+    public function search(SearchRequest $request, SearchAction $action)
+    {
+        return view('users.search', [
+            'users'=>$action($request->searchUser()),
         ]);
     }
 }

@@ -15,11 +15,16 @@ class SquidUser extends Model
         'password',
         'enabled',
         'fullname',
-        'comment'
+        'comment',
     ];
 
     protected static function booted()
     {
         static::addGlobalScope(new SquidUserScope());
+    }
+
+    public function laravel_user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

@@ -14,11 +14,12 @@ class DestroyRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Gate $gate,SquidUserService $squidUserService)
+    public function authorize(Gate $gate, SquidUserService $squidUserService)
     {
-        $auth =  $gate->allows('destroy-squid-user',
+        $auth = $gate->allows('destroy-squid-user',
                 $squidUserService->getById($this->route()->parameter('id'))
         );
+
         return $auth;
     }
 
@@ -34,8 +35,10 @@ class DestroyRequest extends FormRequest
         ];
     }
 
-    public function destroySquidUser() : SquidUser{
-        $squidUser = SquidUser::query()->where('id','=',$this->route()->parameter('id'))->first();
+    public function destroySquidUser() : SquidUser
+    {
+        $squidUser = SquidUser::query()->where('id', '=', $this->route()->parameter('id'))->first();
+
         return $squidUser;
     }
 }

@@ -10,7 +10,8 @@ class ModifyRequest extends FormRequest
 {
     public function authorize(Gate $gate) : bool
     {
-        $auth =  $gate->allows('modify-user',$this->route()->parameter('id'));
+        $auth = $gate->allows('modify-user', $this->route()->parameter('id'));
+
         return $auth;
     }
 
@@ -19,7 +20,7 @@ class ModifyRequest extends FormRequest
         return [
             'name'=>'filled',
             'email'=>'filled|unique:users,email,'.$this->route()->parameter('id').',id',
-            'password'=>['string', 'min:8','filled'],
+            'password'=>['string', 'min:8', 'filled'],
         ];
     }
 
@@ -27,6 +28,7 @@ class ModifyRequest extends FormRequest
     {
         $user = new User($this->validated());
         $user->id = $this->route()->parameter('id');
+
         return $user;
     }
 }

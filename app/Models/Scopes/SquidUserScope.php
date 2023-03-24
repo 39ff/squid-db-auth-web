@@ -22,5 +22,4 @@ class SquidUserScope implements Scope
             $builder->where('user_id', '=', Auth::user()->id);
         }
     }
-
 }

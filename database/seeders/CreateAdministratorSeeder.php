@@ -30,8 +30,8 @@ class CreateAdministratorSeeder extends Seeder
         $user = Auth::loginUsingId($aUser->id);
         $token = $user->createToken('token1');
 
-        echo "Email: ".$email.PHP_EOL;
-        echo "Password: ".$password.PHP_EOL;
-        echo "Token: ".$token->plainTextToken.PHP_EOL;
+        echo 'Email: '.$email.PHP_EOL;
+        echo 'Password: '.$password.PHP_EOL;
+        echo 'Token: '.$token->plainTextToken.PHP_EOL;
     }
 }

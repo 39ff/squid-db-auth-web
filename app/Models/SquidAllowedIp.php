@@ -18,4 +18,9 @@ class SquidAllowedIp extends Model
     {
         static::addGlobalScope(new SquidUserScope());
     }
+
+    public function laravel_user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

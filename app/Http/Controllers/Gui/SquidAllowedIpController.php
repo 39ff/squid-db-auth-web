@@ -12,23 +12,29 @@ use App\UseCases\AllowedIp\SearchAction;
 
 class SquidAllowedIpController extends Controller
 {
-    public function search(SearchRequest $request,SearchAction $action){
-        return view('squidallowedips.search',[
-            'ips'=>$action($request->searchSquidAllowedIp())
+    public function search(SearchRequest $request, SearchAction $action)
+    {
+        return view('squidallowedips.search', [
+            'ips'=>$action($request->searchSquidAllowedIp()),
         ]);
     }
 
-    public function creator(){
+    public function creator()
+    {
         return view('squidallowedips.creator');
     }
 
-    public function create(CreateRequest $request,CreateAction $action){
+    public function create(CreateRequest $request, CreateAction $action)
+    {
         $action($request->createSquidAllowedIp());
-        return redirect()->route('ip.search',$request->user()->id);
+
+        return redirect()->route('ip.search', $request->user()->id);
     }
 
-    public function destroy(DestroyRequest $request,DestroyAction $action){
+    public function destroy(DestroyRequest $request, DestroyAction $action)
+    {
         $action($request->destroySquidAllowedIp());
-        return redirect()->route('ip.search',$request->user()->id);
+
+        return redirect()->route('ip.search', $request->user()->id);
     }
 }

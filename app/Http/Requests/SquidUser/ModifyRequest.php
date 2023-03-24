@@ -14,20 +14,20 @@ class ModifyRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Gate $gate,SquidUserService $squidUserService)
+    public function authorize(Gate $gate, SquidUserService $squidUserService)
     {
-        $auth =  $gate->allows('modify-squid-user',
+        $auth = $gate->allows('modify-squid-user',
             $squidUserService->getById($this->route()->parameter('id'))
         );
+
         return $auth;
     }
 
-
     protected function prepareForValidation()
     {
-        if(empty($this->enabled)){
+        if (empty($this->enabled)) {
             $this->merge([
-                'enabled'=>0
+                'enabled'=>0,
             ]);
         }
     }
@@ -44,13 +44,15 @@ class ModifyRequest extends FormRequest
             'password'=>['required', 'string', 'min:8'],
             'enabled'=>'filled|digits_between:0,1',
             'fullname'=>'nullable',
-            'comment'=>'nullable'
+            'comment'=>'nullable',
         ];
     }
 
-    public function modifySquidUser() : SquidUser{
+    public function modifySquidUser() : SquidUser
+    {
         $squidUser = new SquidUser($this->validated());
         $squidUser->id = $this->route()->parameter('id');
+
         return $squidUser;
     }
 }

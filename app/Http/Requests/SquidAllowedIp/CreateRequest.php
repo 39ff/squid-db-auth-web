@@ -15,7 +15,8 @@ class CreateRequest extends FormRequest
      */
     public function authorize(Gate $gate)
     {
-        $auth =  $gate->allows('create-squid-allowed-ip',$this->route()->parameter('user_id'));
+        $auth = $gate->allows('create-squid-allowed-ip', $this->route()->parameter('user_id'));
+
         return $auth;
     }
 
@@ -27,7 +28,7 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'ip'=>'required|ip|unique:squid_allowed_ips'
+            'ip'=>'required|ip|unique:squid_allowed_ips',
         ];
     }
 
@@ -35,6 +36,7 @@ class CreateRequest extends FormRequest
     {
         $squidAllowedIp = new SquidAllowedIp($this->validated());
         $squidAllowedIp->user_id = $this->route()->parameter('user_id');
+
         return $squidAllowedIp;
     }
 }

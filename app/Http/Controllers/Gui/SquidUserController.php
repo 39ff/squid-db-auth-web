@@ -19,45 +19,55 @@ class SquidUserController extends Controller
 {
     private $squidUserService;
 
-    public function __construct(SquidUserService $squidUserService){
+    public function __construct(SquidUserService $squidUserService)
+    {
         $this->squidUserService = $squidUserService;
     }
 
-    public function search(SearchRequest $request,SearchAction $action){
-        return view('squidusers.search',[
-            'users'=>$action($request->searchSquidUser())
+    public function search(SearchRequest $request, SearchAction $action)
+    {
+        return view('squidusers.search', [
+            'users'=>$action($request->searchSquidUser()),
         ]);
     }
 
-    public function creator(){
+    public function creator()
+    {
         return view('squidusers.creator');
     }
 
-    public function editor(ReadRequest $request){
+    public function editor(ReadRequest $request)
+    {
         $squidUser = $this->squidUserService->getById($request->route()->parameter('id'));
-        return view('squidusers.editor',[
+
+        return view('squidusers.editor', [
             'id'=>$squidUser->id,
             'user'=>$squidUser->user,
             'password'=>$squidUser->password,
             'fullname'=>$squidUser->fullname,
             'comment'=>$squidUser->comment,
-            'enabled'=>$squidUser->enabled
+            'enabled'=>$squidUser->enabled,
         ]);
     }
 
-    public function modify(ModifyRequest $request,ModifyAction $action){
+    public function modify(ModifyRequest $request, ModifyAction $action)
+    {
         $action($request->modifySquidUser());
-        return redirect()->route('squiduser.search',$request->user()->id);
+
+        return redirect()->route('squiduser.search', $request->user()->id);
     }
 
-
-    public function create(CreateRequest $request,CreateAction $action){
+    public function create(CreateRequest $request, CreateAction $action)
+    {
         $action($request->createSquidUser());
-        return redirect()->route('squiduser.search',$request->user()->id);
+
+        return redirect()->route('squiduser.search', $request->user()->id);
     }
 
-    public function destroy(DestroyRequest $request,DestroyAction $action){
+    public function destroy(DestroyRequest $request, DestroyAction $action)
+    {
         $action($request->destroySquidUser());
-        return redirect()->route('squiduser.search',$request->user()->id);
+
+        return redirect()->route('squiduser.search', $request->user()->id);
     }
 }

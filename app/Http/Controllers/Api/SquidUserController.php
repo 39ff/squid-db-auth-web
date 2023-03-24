@@ -16,25 +16,29 @@ use App\UseCases\SquidUser\SearchAction;
 
 class SquidUserController extends Controller
 {
-    public function search(SearchRequest $request, SearchAction $action) : SquidUserCollection{
+    public function search(SearchRequest $request, SearchAction $action) : SquidUserCollection
+    {
         $query = $request->searchSquidUser();
 
         return new SquidUserCollection($action($query));
     }
 
-    public function create(CreateRequest $request, CreateAction $action) : SquidUserResource{
+    public function create(CreateRequest $request, CreateAction $action) : SquidUserResource
+    {
         $user = $request->createSquidUser();
 
         return new SquidUserResource($action($user));
     }
 
-    public function modify(ModifyRequest $request, ModifyAction $action) : SquidUserResource{
+    public function modify(ModifyRequest $request, ModifyAction $action) : SquidUserResource
+    {
         $user = $request->modifySquidUser();
 
         return new SquidUserResource($action($user));
     }
 
-    public function destroy(DestroyRequest $request, DestroyAction $action) : SquidUserResource{
+    public function destroy(DestroyRequest $request, DestroyAction $action) : SquidUserResource
+    {
         $user = $request->destroySquidUser();
 
         return new SquidUserResource($action($user));

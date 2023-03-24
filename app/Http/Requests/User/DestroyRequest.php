@@ -10,7 +10,8 @@ class DestroyRequest extends FormRequest
 {
     public function authorize(Gate $gate)
     {
-        $auth =  $gate->allows('destroy-user',$this->route()->parameter('id'));
+        $auth = $gate->allows('destroy-user', $this->route()->parameter('id'));
+
         return $auth;
     }
 
@@ -26,10 +27,10 @@ class DestroyRequest extends FormRequest
         ];
     }
 
-
     public function destroyUser(): User
     {
-        $user =  User::query()->where('id','=',$this->route()->parameter('id'))->first();
+        $user = User::query()->where('id', '=', $this->route()->parameter('id'))->first();
+
         return $user;
     }
 }

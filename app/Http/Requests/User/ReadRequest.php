@@ -14,7 +14,8 @@ class ReadRequest extends FormRequest
      */
     public function authorize(Gate $gate)
     {
-        $auth =  $gate->allows('search-user');
+        $auth = $gate->allows('search-user');
+
         return $auth;
     }
 
