@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Gui;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\DestroyRequest;
@@ -15,7 +13,9 @@ use App\UseCases\User\CreateAction;
 use App\UseCases\User\DestroyAction;
 use App\UseCases\User\ModifyAction;
 use App\UseCases\User\SearchAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {

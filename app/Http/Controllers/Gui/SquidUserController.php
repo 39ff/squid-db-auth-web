@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Gui;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SquidUser\CreateRequest;
 use App\Http\Requests\SquidUser\DestroyRequest;
@@ -15,7 +13,9 @@ use App\UseCases\SquidUser\CreateAction;
 use App\UseCases\SquidUser\DestroyAction;
 use App\UseCases\SquidUser\ModifyAction;
 use App\UseCases\SquidUser\SearchAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SquidUserController extends Controller
 {
