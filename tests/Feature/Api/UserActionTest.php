@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-class UserActionTest extends TestCase
+final class UserActionTest extends TestCase
 {
     use RefreshDatabase;
 
