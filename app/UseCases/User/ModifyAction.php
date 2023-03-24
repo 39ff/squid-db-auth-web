@@ -7,10 +7,6 @@ use function assert;
 
 class ModifyAction
 {
-    /**
-     * @param User $user
-     * @return User
-     */
     public function __invoke(User $user): User
     {
         assert($user->id !== null);
