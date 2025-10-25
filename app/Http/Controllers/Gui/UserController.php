@@ -19,11 +19,9 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    private $user;
-
-    public function __construct(UserService $user)
-    {
-        $this->user = $user;
+    public function __construct(
+        private readonly UserService $user
+    ) {
     }
 
     public function create(CreateRequest $request, CreateAction $action): RedirectResponse

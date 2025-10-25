@@ -6,10 +6,8 @@ use App\Models\User;
 
 class UserService
 {
-    public function getById($id) : User
+    public function getById(int|string $id): User
     {
-        $user = User::query()->where('id', '=', $id)->first();
-
-        return $user ?? new User();
+        return User::query()->findOr($id, fn() => new User());
     }
 }

@@ -6,10 +6,8 @@ use App\Models\SquidUser;
 
 class SquidUserService
 {
-    public function getById($id) : SquidUser
+    public function getById(int|string $id): SquidUser
     {
-        $su = SquidUser::query()->where('id', '=', $id)->first();
-
-        return $su ?? new SquidUser();
+        return SquidUser::query()->findOr($id, fn() => new SquidUser());
     }
 }

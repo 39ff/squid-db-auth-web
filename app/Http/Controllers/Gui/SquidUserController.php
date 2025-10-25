@@ -19,11 +19,9 @@ use Illuminate\View\View;
 
 class SquidUserController extends Controller
 {
-    private $squidUserService;
-
-    public function __construct(SquidUserService $squidUserService)
-    {
-        $this->squidUserService = $squidUserService;
+    public function __construct(
+        private readonly SquidUserService $squidUserService
+    ) {
     }
 
     public function search(SearchRequest $request, SearchAction $action): View

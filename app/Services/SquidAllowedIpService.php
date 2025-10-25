@@ -6,10 +6,8 @@ use App\Models\SquidAllowedIp;
 
 class SquidAllowedIpService
 {
-    public function getById($id) : SquidAllowedIp
+    public function getById(int|string $id): SquidAllowedIp
     {
-        $ip = SquidAllowedIp::query()->where('id', '=', $id)->first();
-
-        return $ip ?? new SquidAllowedIp();
+        return SquidAllowedIp::query()->findOr($id, fn() => new SquidAllowedIp());
     }
 }
