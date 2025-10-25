@@ -48,7 +48,8 @@ class BulkUpdateAction
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            $results['failed'] = count($rows) - $results['success'];
+            $results['failed'] = count($rows);
+            $results['success'] = 0;
             $results['errors'][] = $e->getMessage();
         }
 
