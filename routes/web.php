@@ -48,5 +48,7 @@ Route::middleware('auth:web')->group(function () {
         Route::post('create/to_specified_user/{user_id}', [SquidUserController::class, 'create'])->name('squiduser.create');
         Route::post('modify/{id}', [SquidUserController::class, 'modify'])->name('squiduser.modify');
         Route::post('destroy/{id}', [SquidUserController::class, 'destroy'])->name('squiduser.destroy');
+        Route::get('bulk/importer', [SquidUserController::class, 'bulkImporter'])->name('squiduser.bulk.importer');
+        Route::post('bulk/import', [SquidUserController::class, 'bulkImport'])->name('squiduser.bulk.import');
     });
 });

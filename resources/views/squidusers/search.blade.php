@@ -7,8 +7,13 @@
                 <div class="card">
                     <div class="card-header">{{ __('Search SquidUsers') }}</div>
                     <div class="card-body">
+                        <div class="mb-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <a href="{{ route('squiduser.creator') }}" class="btn btn-sm btn-primary">Create SquidUser</a>
+                                <a href="{{ route('squiduser.bulk.importer') }}" class="btn btn-sm btn-success">Bulk Import (CSV)</a>
+                            </div>
+                        </div>
                         <table class="table table-sm table-hover">
-                            <a href="{{ route('squiduser.creator') }}">Create SquidUser</a>
                             <thead>
                             <tr>
                                 @can('create-user')

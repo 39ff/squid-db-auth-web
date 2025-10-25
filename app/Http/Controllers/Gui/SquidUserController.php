@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Gui;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SquidUser\BulkImportRequest;
 use App\Http\Requests\SquidUser\CreateRequest;
 use App\Http\Requests\SquidUser\DestroyRequest;
 use App\Http\Requests\SquidUser\ModifyRequest;
 use App\Http\Requests\SquidUser\ReadRequest;
 use App\Http\Requests\SquidUser\SearchRequest;
 use App\Services\SquidUserService;
+use App\UseCases\SquidUser\BulkCreateAction;
+use App\UseCases\SquidUser\BulkDeleteAction;
+use App\UseCases\SquidUser\BulkUpdateAction;
 use App\UseCases\SquidUser\CreateAction;
 use App\UseCases\SquidUser\DestroyAction;
 use App\UseCases\SquidUser\ModifyAction;
@@ -69,5 +73,34 @@ class SquidUserController extends Controller
         $action($request->destroySquidUser());
 
         return redirect()->route('squiduser.search', $request->user()->id);
+    }
+
+    public function bulkImporter(): View
+    {
+        return view('squidusers.bulk_import');
+    }
+
+    public function bulkImport(BulkImportRequest $request): RedirectResponse
+    {
+        $rows = $request->parseCsv();
+        $operation = $request->input('operation');
+        $userId = $request->user()->id;
+
+        $results = match ($operation) {
+            'create' => (new BulkCreateAction())($rows, $userId),
+            'update' => (new BulkUpdateAction())($rows, $userId),
+            'delete' => (new BulkDeleteAction())($rows, $userId),
+            default => ['success' => 0, 'failed' => 0, 'errors' => ['Invalid operation']],
+        };
+
+        $message = "Success: {$results['success']}, Failed: {$results['failed']}";
+        if (!empty($results['errors'])) {
+            $message .= "\nErrors: " . implode("\n", $results['errors']);
+        }
+
+        return redirect()
+            ->route('squiduser.bulk.importer')
+            ->with('message', $message)
+            ->with('results', $results);
     }
 }
