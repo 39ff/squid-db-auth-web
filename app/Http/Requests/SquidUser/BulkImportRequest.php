@@ -12,7 +12,7 @@ class BulkImportRequest extends FormRequest
      */
     public function authorize(Gate $gate): bool
     {
-        return $gate->allows('create-squid-user', $this->route()->parameter('user_id'));
+        return $gate->allows('create-squid-user', $this->user()->id);
     }
 
     /**
@@ -31,22 +31,47 @@ class BulkImportRequest extends FormRequest
         $file = $this->file('csv_file');
         $handle = fopen($file->getRealPath(), 'r');
 
-        $rows = [];
-        $header = null;
-
-        while (($data = fgetcsv($handle, 1000, ',')) !== false) {
-            if ($header === null) {
-                $header = $data;
-                continue;
-            }
-
-            $row = array_combine($header, $data);
-            if ($row !== false) {
-                $rows[] = $row;
-            }
+        if ($handle === false) {
+            throw new \RuntimeException('Failed to open CSV file');
         }
 
-        fclose($handle);
+        $rows = [];
+        $header = null;
+        $lineNumber = 0;
+
+        try {
+            while (($data = fgetcsv($handle, 1000, ',')) !== false) {
+                $lineNumber++;
+
+                if ($header === null) {
+                    $header = array_map('trim', $data);
+                    continue;
+                }
+
+                // Skip empty lines
+                if (empty(array_filter($data))) {
+                    continue;
+                }
+
+                // Ensure column count matches header
+                if (count($data) !== count($header)) {
+                    throw new \RuntimeException(
+                        "Line {$lineNumber}: Column count mismatch. Expected " . count($header) . " columns, got " . count($data)
+                    );
+                }
+
+                $row = array_combine($header, array_map('trim', $data));
+                if ($row !== false) {
+                    $rows[] = $row;
+                }
+            }
+        } finally {
+            fclose($handle);
+        }
+
+        if (empty($rows)) {
+            throw new \RuntimeException('CSV file is empty or contains no valid data rows');
+        }
 
         return $rows;
     }

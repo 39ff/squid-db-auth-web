@@ -19,28 +19,24 @@ class BulkCreateAction
 
         try {
             foreach ($rows as $index => $row) {
-                try {
-                    $squidUser = new SquidUser([
-                        'user' => $row['user'] ?? '',
-                        'password' => $row['password'] ?? '',
-                        'enabled' => $row['enabled'] ?? 1,
-                        'fullname' => $row['fullname'] ?? '',
-                        'comment' => $row['comment'] ?? '',
-                    ]);
-                    $squidUser->user_id = $userId;
-                    $squidUser->save();
+                $squidUser = new SquidUser([
+                    'user' => $row['user'] ?? '',
+                    'password' => $row['password'] ?? '',
+                    'enabled' => $row['enabled'] ?? 1,
+                    'fullname' => $row['fullname'] ?? '',
+                    'comment' => $row['comment'] ?? '',
+                ]);
+                $squidUser->user_id = $userId;
+                $squidUser->save();
 
-                    $results['success']++;
-                } catch (\Exception $e) {
-                    $results['failed']++;
-                    $results['errors'][] = "Row " . ($index + 2) . ": " . $e->getMessage();
-                }
+                $results['success']++;
             }
 
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            throw $e;
+            $results['failed'] = count($rows) - $results['success'];
+            $results['errors'][] = $e->getMessage();
         }
 
         return $results;
