@@ -27,7 +27,7 @@ class ModifyRequest extends FormRequest
     public function modifyUser(): User
     {
         $user = new User($this->validated());
-        $user->id = $this->route()->parameter('id');
+        $user->id = (int) $this->route()->parameter('id');
 
         return $user;
     }

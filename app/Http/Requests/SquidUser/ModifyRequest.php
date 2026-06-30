@@ -47,7 +47,7 @@ class ModifyRequest extends FormRequest
     public function modifySquidUser() : SquidUser
     {
         $squidUser = new SquidUser($this->validated());
-        $squidUser->id = $this->route()->parameter('id');
+        $squidUser->id = (int) $this->route()->parameter('id');
 
         return $squidUser;
     }

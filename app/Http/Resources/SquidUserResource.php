@@ -4,14 +4,13 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use JsonSerializable;
 
 class SquidUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @return array|\Illuminate\Contracts\Support\Arrayable|JsonSerializable
+     * @return array<string, mixed>
      */
     public function toArray(Request $request): array
     {
