@@ -31,7 +31,7 @@ class CreateRequest extends FormRequest
     public function createSquidAllowedIp() : SquidAllowedIp
     {
         $squidAllowedIp = new SquidAllowedIp($this->validated());
-        $squidAllowedIp->user_id = $this->route()->parameter('user_id');
+        $squidAllowedIp->user_id = (int) $this->route()->parameter('user_id');
 
         return $squidAllowedIp;
     }

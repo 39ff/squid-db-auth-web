@@ -44,7 +44,7 @@ class CreateRequest extends FormRequest
     public function createSquidUser() : SquidUser
     {
         $squidUser = new SquidUser($this->validated());
-        $squidUser->user_id = $this->route()->parameter('user_id');
+        $squidUser->user_id = (int) $this->route()->parameter('user_id');
 
         return $squidUser;
     }

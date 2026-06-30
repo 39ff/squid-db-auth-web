@@ -1,5 +1,5 @@
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
+    - ./vendor/larastan/larastan/extension.neon
 
 parameters:
 
@@ -9,10 +9,7 @@ parameters:
     # The level 9 is the highest level
     level: 5
 
-    ignoreErrors:
-        - '#Cannot call method parameter\(\) on object\|string.#'
-
-    excludePaths:
-        - ./*/*/FileToBeExcluded.php
-
-    checkMissingIterableValueType: false
+    # Eloquent model attributes typed from the schema (e.g. a primary key) are
+    # not actually guaranteed to be non-null at runtime (unsaved models), so do
+    # not treat those PHPDoc types as certain when reporting always-true checks.
+    treatPhpDocTypesAsCertain: false
